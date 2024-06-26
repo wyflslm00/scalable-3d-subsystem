@@ -1,0 +1,80 @@
+{
+	"result": "success",
+	"data": {
+		"templateId": "f1b48373-48fa-4f79-8fe8-061dc4f07b98",
+		"operate": "line_insert",
+		"containerId": "b692e4e0-b745-11ed-998f-1d6777907d9b",
+		"templateLegendSetId": null,
+		"classCode": null,
+		"legend": null,
+		"textList": null,
+		"lineListMap": null,
+		"line": {
+			"id": "97e0b21c-4f9e-44eb-a198-2226c0c4f113",
+			"templateConnector1": {
+				"containerId": "b692e4e0-b745-11ed-998f-1d6777907d9b",
+				"templateLegendId": "b692e4e0-b745-11ed-998f-1d6777907d9b-277c17dd-62c0-4d27-a242-3757130d50cf",
+				"anchorCode": "T5",
+				"mainPipeId": null
+			},
+			"templateConnector2": {
+				"containerId": "61dfe610-b730-11ed-9a82-3113fbf9b878",
+				"templateLegendId": "61dfe610-b730-11ed-9a82-3113fbf9b878-31119d70-de62-4eca-ba32-21b45e4db76c",
+				"anchorCode": "R5",
+				"mainPipeId": null
+			},
+			"classCodeList": [
+				"ACCCCC",
+				"WESSTP",
+				"ACCCSC"
+			],
+			"matchFiltersList": [
+				[],
+				[],
+				[]
+			],
+			"relChainFilter": [
+				{
+					"relObjType": "container",
+					"relObjId": "ACCCCC",
+					"name": null
+				},
+				{
+					"relObjType": "equipment",
+					"relObjId": "WESSTP",
+					"name": null
+				},
+				{
+					"relObjType": "container",
+					"relObjId": "ACCCSC",
+					"name": null
+				}
+			],
+			"relTypeList": [
+				{
+					"code": "SensorRelationship/Ss2Eq",
+					"name": "温度传感器"
+				},
+				{
+					"code": "SensorRelationship/Ss2Eq",
+					"name": "11#0"
+				}
+			]
+		},
+		"align": null,
+		"compress": null,
+		"hidden": null,
+		"childrenLayout": null,
+		"childrenMargin": 0,
+		"childrenInterval": 0,
+		"packEnable": false,
+		"packInfoCodes": null,
+		"childrenAlign": null,
+		"classCodeList": null,
+		"matchFiltersList": null,
+		"relChainFilter": null,
+		"relTypeList": null,
+		"jointSymbol": null,
+		"chainTypeList": null
+	}
+}
