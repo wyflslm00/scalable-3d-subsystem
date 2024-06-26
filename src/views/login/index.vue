@@ -71,15 +71,14 @@
 
 <script>
 import { validUsername } from "@/utils/validate";
-import SocialSign from "./components/SocialSignin";
 
 export default {
   name: "Login",
-  components: { SocialSign },
+  components: {},
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
-        callback(new Error("Please enter the correct user name"));
+        callback(new Error("请输入正确的用户名"));
       } else {
         callback();
       }
