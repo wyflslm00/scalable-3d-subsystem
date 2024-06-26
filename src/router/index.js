@@ -6,6 +6,7 @@ const routes = [
 	{
 		path: "/",
 		component: () => import("../views/Login.vue"),
+		hidden: true,
 	},
 
 	{
