@@ -61,3 +61,39 @@ div:focus {
 .app-container {
   padding: 0px;
 }
+
+.cnt {
+	display: flex;
+	padding: 12px;
+	flex-direction: column; 
+    flex: 1;
+
+    .head{
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content:space-between;
+
+        .seach{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            
+            &>span{
+                color: #4f4f4f;
+                display: inline-block;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+            }
+        }
+    }
+    .table{
+       flex: 1; 
+    }
+    .foot{
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: right;
+    }
+}

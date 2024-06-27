@@ -6,41 +6,35 @@
 		</div>
 		<div class="mBody">
 			<div class="menu">
-				<el-menu :default-active="activeMenu" :collapse="false" background-color="#ffffff" text-color="#303133" :unique-opened="false" active-text-color="#409EFF" :collapse-transition="false" mode="vertical">
-					<!-- <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" /> -->
-					<template v-for="route in routes">
-						<div v-if="!route.hidden" :key="route.path">
-							<template v-if="hasOneShowingChild(route.children, route) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !route.alwaysShow">
-								<app-link v-if="onlyOneChild.meta" :to="resolvePath(route.path, onlyOneChild.path)">
-									<el-menu-item :index="resolvePath(route.path, onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }">
-										<!-- <item :icon="onlyOneChild.meta.icon || (route.meta && route.meta.icon)" :title="onlyOneChild.meta.title" /> -->
-									</el-menu-item>
-								</app-link>
+				<el-menu router :default-active="$route.path" :unique-opened="true">
+					<template v-for="(route, index) in routes">
+						<el-submenu :index="index" :key="'sub' + index" v-if="!route.hidden">
+							<template slot="title">{{ route.meta.title }}</template>
+							<template v-if="route.children">
+								<el-menu-item v-for="(child, idx) in route.children" :key="'child' + idx" :index="resolvePath(route.path, child.path)">{{ child.meta.title }}</el-menu-item>
 							</template>
-
-							<el-submenu v-else ref="subMenu" :index="resolvePath(route.path, route.path)" popper-append-to-body>
-								<template slot="title">
-									<item v-if="route.meta" :icon="route.meta && route.meta.icon" :title="route.meta.title" />
-								</template>
-								<sidebar-item v-for="child in item.children" :key="child.path" :is-nest="true" :item="child" :base-path="resolvePath(route.path, child.path)" class="nest-menu" />
-							</el-submenu>
-						</div>
+						</el-submenu>
 					</template>
 				</el-menu>
+				<!-- {{ routes }} -->
 			</div>
-			<router-view :key="key" />
+			<div class="navigation">
+				<el-breadcrumb separator="/">
+					<el-breadcrumb-item v-for="nav in naviList">{{ nav }}</el-breadcrumb-item>
+				</el-breadcrumb>
+			</div>
+			<router-view class="container" :key="key" />
 		</div>
 	</div>
 </template>
 
 <script>
-import path from "path";
 import { isExternal } from "@/utils/validate";
 
 export default {
 	data() {
 		return {
-			onlyOneChild: null,
+			naviList: [],
 		};
 	},
 
@@ -56,7 +50,6 @@ export default {
 		activeMenu() {
 			const route = this.$route;
 			const { meta, path } = route;
-			// if set path, the sidebar will highlight the path you set
 			if (meta.activeMenu) {
 				return meta.activeMenu;
 			}
@@ -64,33 +57,11 @@ export default {
 		},
 	},
 
-	mounted() {},
+	mounted() {
+		console.log(this.$router.options.routes);
+	},
 
 	methods: {
-		hasOneShowingChild(children = [], parent) {
-			const showingChildren = children.filter((item) => {
-				if (item.hidden) {
-					return false;
-				} else {
-					// Temp set(will be used if only has one showing child)
-					this.onlyOneChild = item;
-					return true;
-				}
-			});
-
-			// When there is only one child router, the child router is displayed by default
-			if (showingChildren.length === 1) {
-				return true;
-			}
-
-			// Show parent if there are no child router to display
-			if (showingChildren.length === 0) {
-				this.onlyOneChild = { ...parent, path: "", noShowingChildren: true };
-				return true;
-			}
-
-			return false;
-		},
 		resolvePath(basePath, routePath) {
 			if (isExternal(routePath)) {
 				return routePath;
@@ -98,7 +69,20 @@ export default {
 			if (isExternal(basePath)) {
 				return basePath;
 			}
-			return path.resolve(basePath, routePath);
+			return `${basePath}/${routePath}`;
+		},
+	},
+	watch: {
+		$route: {
+			handler(to, from) {
+				this.naviList = [];
+				const matched = to.matched;
+				matched.map((x) => {
+					this.naviList.push(x.meta.title);
+				});
+			},
+			deep: true,
+			immediate: true,
 		},
 	},
 };
@@ -115,8 +99,7 @@ export default {
 		overflow: hidden;
 		position: relative;
 		background: #fff;
-		-webkit-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-		box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+		border-bottom: 1px solid #dbdbdb;
 	}
 	.mBody {
 		position: absolute;
@@ -132,6 +115,26 @@ export default {
 			left: 0;
 			bottom: 0;
 			border-right: 1px solid #dbdbdb;
+		}
+
+		.navigation {
+			position: absolute;
+			top: 0px;
+			left: 220px;
+			right: 0;
+			height: 40px;
+			border-bottom: 1px solid #dbdbdb;
+			display: flex;
+			align-items: center;
+			padding-left: 12px;
+		}
+
+		.container {
+			position: absolute;
+			top: 40px;
+			left: 220px;
+			right: 0;
+			bottom: 0;
 		}
 	}
 }
