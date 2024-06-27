@@ -121,6 +121,9 @@ export default {
 		handleLogin() {
 			this.$refs.loginForm.validate((valid) => {
 				if (valid) {
+					this.$router.push({
+						path: "scene",
+					});
 				} else {
 					console.log("登录错误!!");
 					return false;
@@ -252,7 +255,7 @@ $light_gray: #eee;
 	.show-pwd {
 		position: absolute;
 		right: 10px;
-		top: 12px;
+		top: 7px;
 		font-size: 16px;
 		color: $dark_gray;
 		cursor: pointer;
