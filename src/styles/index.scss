@@ -80,10 +80,11 @@ div:focus {
             align-items: center;
             
             &>span{
-                color: #4f4f4f;
                 display: inline-block;
-                flex-wrap: nowrap;
                 white-space: nowrap;
+                font-family: "Arial Negreta", "Arial Normal", "Arial", sans-serif;
+                color: #606266;
+                font-size: 16px;
             }
             .btnSeach{
                 margin-left: 12px;

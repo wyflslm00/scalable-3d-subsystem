@@ -9,8 +9,24 @@
 			</div>
 			<div><el-button type="primary" size="small">添加主题</el-button></div>
 		</div>
-		<div class="table"></div>
-		<div class="foot"></div>
+		<div class="table">
+			<el-table :data="tableData" border style="width: 100%">
+				<el-table-column fixed prop="date" label="序号" width="90"> </el-table-column>
+				<el-table-column prop="name" label="主题名称" width="260"> </el-table-column>
+				<el-table-column prop="province" label="主题编号" width="140"> </el-table-column>
+				<el-table-column prop="city" label="区域名称" width="140"> </el-table-column>
+				<el-table-column prop="city" label="说明"> </el-table-column>
+				<el-table-column fixed="right" label="操作" width="200">
+					<template slot-scope="scope">
+						<el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+						<el-button type="text" size="small">编辑</el-button>
+					</template>
+				</el-table-column>
+			</el-table>
+		</div>
+		<div class="foot">
+			<el-pagination background layout="prev, pager, next" :total="1000"> </el-pagination>
+		</div>
 	</div>
 </template>
 
