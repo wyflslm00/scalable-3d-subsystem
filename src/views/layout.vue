@@ -2,7 +2,7 @@
 <template>
 	<div class="main">
 		<div class="head">
-			<span>标题</span>
+			<span class="title">可扩展三维展示控制管理系统</span>
 		</div>
 		<div class="mBody">
 			<div class="menu">
@@ -100,6 +100,16 @@ export default {
 		position: relative;
 		background: #fff;
 		border-bottom: 1px solid #dbdbdb;
+		display: flex;
+		align-content: center;
+		padding-left: 20px;
+		.title {
+			line-height: 50px;
+			font-family: "Arial Negreta", "Arial Normal", "Arial", sans-serif;
+			font-size: 18px;
+			font-weight: 700;
+			color: #4f4f4f;
+		}
 	}
 	.mBody {
 		position: absolute;
