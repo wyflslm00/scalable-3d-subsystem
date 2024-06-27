@@ -26,13 +26,6 @@ module.exports = defineConfig({
 					"^/relation-web/admPost": "",
 				},
 			},
-			"/relation-web/loginPost": {
-				target: "https://dev-b.yushu.cloud/",
-				changeOrigin: true,
-				pathRewrite: {
-					"^/relation-web/loginPost": "",
-				},
-			},
 		},
 	},
 	css: {

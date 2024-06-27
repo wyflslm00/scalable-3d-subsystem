@@ -9,9 +9,7 @@ export default {
 	name: "App",
 	components: {},
 	data() {
-		return {
-			objTypeTreeList: [],
-		};
+		return {};
 	},
 	mounted() {},
 	computed: {},
