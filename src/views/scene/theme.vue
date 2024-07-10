@@ -7,7 +7,7 @@
 				<el-input size="small" clearable placeholder="请输入检索摘要"></el-input>
 				<el-button type="primary" icon="el-icon-search" size="small" class="btnSeach">搜索</el-button>
 			</div>
-			<div><el-button type="primary" size="small">添加主题</el-button></div>
+			<div><el-button type="primary" size="small" @click="add">添加主题</el-button></div>
 		</div>
 		<div class="table">
 			<el-table :data="tableData" border style="width: 100%">
@@ -27,22 +27,49 @@
 		<div class="foot">
 			<el-pagination background layout="prev, pager, next" :total="1000"> </el-pagination>
 		</div>
+		<addTheme v-if="diaShow" :dialogVisible="diaShow"  :type='type' :editName="editName" @chose="editChose" @confirm='editConfirm' />
 	</div>
 </template>
 
 <script>
+import addTheme from './components/addTheme.vue'
 export default {
+	components:{addTheme},
+
 	data() {
-		return {};
+		return {
+			diaShow:false, //弹窗开关
+			type:0, //0新增 1编辑
+			editName:'新增主题', //弹窗名称
+
+		};
 	},
 
-	components: {},
 
 	computed: {},
 
 	mounted() {},
 
-	methods: {},
+	methods: {
+		add(){
+			this.diaShow = true
+			this.type = 0
+			this.editName = '新增主题'
+
+		},
+		edit(){
+			this.diaShow = true
+			this.type = 1
+			this.editName = '编辑主题'
+		},
+		editChose(){
+			this.diaShow = false
+		},
+		editConfirm(){
+			this.editChose()
+		}
+		
+	},
 };
 </script>
 <style lang="scss" scoped></style>
